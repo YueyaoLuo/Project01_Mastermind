@@ -32,8 +32,8 @@ MASTERMIND
 
 
 # To-do list:
-- [] create playing board
-- [] create bottons
-- [] set computer randomly generated solution
-- [] pop-up windows to send message
-- [] user click to choose colours
+- [ ] create playing board
+- [ ] create bottons
+- [ ] set computer randomly generated solution
+- [ ] pop-up windows to send message
+- [ ] user click to choose colours
