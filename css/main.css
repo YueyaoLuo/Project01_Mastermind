@@ -4,7 +4,7 @@
 }
 
 body {
-  
+
     height: 100vh;
 
     margin: 0;
@@ -13,71 +13,89 @@ body {
     align-items: center;
 }
 
-h1 {  
+h1 {
     text-align: center;
 }
 
-#section{
+#section {
+    /* margin: 2vmin; */
     display: grid;
     grid-template-columns: 4fr 4fr;
-
+    grid-gap: 2vmin;
     background-color: lightgrey;
-    border-radius: 2vmin;
+
     height: 60%vh;
 }
 
-#playBoard, #hints {
+#playBoard {
     display: grid;
-    grid-template-rows: repeat(12, 50px);
-    grid-template-columns: repeat(4, 50px);
-    align-items: center;
-    
+    grid-template-rows: repeat(12, 5vmin);
+    grid-template-columns: repeat(4, 5vmin);
+
 }
 
-#playBoard > div {
-    margin: 2vmin;
-    border: 1vmin solid black;
+#playBoard>div {
+    margin: 1vmin;
+    border: 0.2vmin solid black;
+    border-radius: 50%;
+    background-color: darkgrey;
+    background-size: contain;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+
+}
+
+#hints {
+    display: grid;
+    grid-template-rows: repeat(12, 5vmin);
+    grid-template-columns: repeat(4, 5vmin);
+
+}
+
+
+
+#hints>div {
+    margin: 1vmin;
+    border: 0.2vmin solid black;
+    border-radius: 50%;
+    background-color: darkgrey;
+    background-size: contain;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#colours {
+    display: grid;
+    grid-template-rows: repeat(1, 5vmin);
+    grid-template-columns: repeat(6, 5vmin);
+    grid-gap: 2vmin;
+}
+
+#colours>div {
+    margin: 1vmin;
+    border: 0.2vmin solid black;
     border-radius: 50%;
     background-color: darkgrey;
     background-size: contain;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 10px;
-
 }
 
-/* #hints {
-    display: grid;
-    grid-template-rows: repeat(12, 10vmin);
-    grid-template-columns: repeat(4, 10vmin);
-
-} */
-
-
-#hints > div {
-    margin: 2vmin;
-    border: 1vmin solid black;
-    border-radius: 50%;
-}
-
-#colours > div {
-    display: inline-block;
-    justify-content: space-between;
-    gap: 100px;
-}
-
-#bottons{
+#bottons {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-
+    grid-gap: 4vmin;
 }
 
-div > botton {
+#bottons>div {
+    justify-content: space-between;
     margin-top: 5vmin;
     padding: 1.5vmin;
     background-color: grey;
     color: white;
-    border-radius: 2vmin;
     font-size: 4vmin;
 }
