@@ -15,7 +15,10 @@ body {
 
 h1 {
     text-align: center;
+    font-size: 5vmin;
 }
+
+
 
 #section {
     /* margin: 2vmin; */
@@ -38,7 +41,7 @@ h1 {
     margin: 1vmin;
     border: 0.2vmin solid black;
     border-radius: 50%;
-    background-color: darkgrey;
+    background-color: white;
     background-size: contain;
     display: flex;
     justify-content: center;
@@ -57,45 +60,65 @@ h1 {
 
 
 #hints>div {
-    margin: 1vmin;
-    border: 0.2vmin solid black;
+    margin: 1.8vmin;
     border-radius: 50%;
-    background-color: darkgrey;
+    background-color: white;
     background-size: contain;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-#colours {
+.colours {
     display: grid;
     grid-template-rows: repeat(1, 5vmin);
     grid-template-columns: repeat(6, 5vmin);
-    grid-gap: 2vmin;
+    grid-gap: 2.4vmin;
+    background-color: lightgray;
+    /* border: 0.2vmin solid lightgray; */
 }
 
-#colours>div {
+.colours>div {
     margin: 1vmin;
     border: 0.2vmin solid black;
     border-radius: 50%;
-    background-color: darkgrey;
     background-size: contain;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-#bottons {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-gap: 4vmin;
+.colours>#red {
+    background-color: #ea9999;
+}
+.colours>#orange {
+    background-color: #f9cb9c;
 }
 
-#bottons>div {
-    justify-content: space-between;
-    margin-top: 5vmin;
-    padding: 1.5vmin;
+.colours>#yellow{
+    background-color: #ffe599;
+}
+
+.colours>#green {
+    background-color: #b6d7a8;
+}
+.colours>#blue {
+    background-color: #9fc5e8;
+}
+.colours>#purple {
+    background-color: #b4a7d6
+}
+
+
+.button {
+    display: flex;
+    column-gap: 2vmin;
+}
+
+.button>button {
+    margin-top: 2vmin;
+    padding: 0.5vmin;
     background-color: grey;
     color: white;
-    font-size: 4vmin;
+    font-size: 2vmin;
 }
