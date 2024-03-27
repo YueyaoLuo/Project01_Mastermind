@@ -1,18 +1,17 @@
 /*----- constants -----*/
-const computer = 'COMPUTER'
-const player = 'PLAYER';
-const hints = 'HINTS'
 
 const allColors = ['red', 'orange', 'yellow', 'green', 'blue', 'purple']
 /*----- state variables -----*/
 let computerChoice;
-let playerChoice;
+// let playerChoice = [];
 
 /*----- cached elements  -----*/
 
+//get each of div (circle)
 const boardEl = document.querySelectorAll('.playBoard');
 
-console.log(boardEl[0].id)
+
+
 const hintsEl = document.getElementById('hints')
 // const red = document.getElementById('red');
 // const orange = document.getElementById('orange');
@@ -28,6 +27,7 @@ const buttonEl = document.querySelector('.button')
 /*----- event listeners -----*/
 buttonEl.addEventListener('click', buttonElClickHandler);
 colorEl.addEventListener('click', colorElClickHandler);
+// boardEl.addEventListener('click', boardElClickHandler);
 
 
 
@@ -38,52 +38,42 @@ colorEl.addEventListener('click', colorElClickHandler);
 //when initilizing the game, computer generated random secrete color code (including duplicated color)
 
 function setComputerChoice() {
-    
-    const secreteArray = [];
-    for (let i=0; i<6; i++) {
-        randomInt = Math.floor(Math.random() * 6)
-        secreteArray.push(randomInt)
-     };
-    
-    const colorArr = [];
-     for (let i=0; i<4; i++) {
-        colorIndex = secreteArray[i]
 
-        colorArr.push(allColors[colorIndex]);
-    }
-    return computerChoice = colorArr;
+    const secreteColors = [];
+    for (let i = 0; i < 4; i++) {
+        randomInt = Math.floor(Math.random() * allColors.length)
+        secreteColors.push(allColors[randomInt])
+    };
+
+    return secreteColors;
 
 }
 
+console.log(setComputerChoice())
 
-//set players choice function
-//first not to consider clickable or not or other things, just assigning colours to the row
-
-function setPlayerChoice() {
-    for (let i=0; i<4; i++) {
-        const choice = colorElClickHandler();
-
-    }
-}
-
-
- 
-//compare players choice with computer choice for hint section
 
 
 /*----- controller functions -----*/
-//when clicking colors to choose color
+//when clicking colors to choose color - set players choice
 function colorElClickHandler(event) {
-    event.preventDefault();
-    const target = event.target.id;
-    return target;
+    if (event.target.className !== "circle") {
+        return;
+    }
+    //check the hole color, if it is white then the chosen color can be assigned to it, otherwise need to assign the next one
+    const targetColor = getComputedStyle(event.target).backgroundColor;
+    for (i = 0; i < 48; i++) {
+        if (getComputedStyle(boardEl[i]).backgroundColor === 'rgb(255, 255, 255)') {
+            boardEl[i].style.backgroundColor = targetColor
+            return;
+        }
+    }
 }
 
 //when clicking buttons
 
 function buttonElClickHandler(event) {
     event.preventDefault();
-    const target = event.target.name;
+    const target = event.target.getAttribute('name');
     if (target === 'instructions') {
         instructionWindow()
     } else if (target === 'restart') {
@@ -98,17 +88,24 @@ function buttonElClickHandler(event) {
 
 
 
-
+//pop up windows
 function instructionWindow() {
-
+    window.alert('instructions blah blah')
 }
 
+
+
+
+
+
 function restart() {
-//playboard and hint section back to white
+    //playboard and hint section back to white
+    for (i = 0; i < 48; i++) {
+        boardEl[i].style.backgroundColor = 'white'; 
+    }
 
-
-//regenerate computer choice
-setComputerChoice()
+    //regenerate computer choice
+    computerChoice = setComputerChoice();
 
 }
 
@@ -116,9 +113,23 @@ function backspace() {
 
 }
 
+
+
+//compare players choice with computer choice for hint section
+
 function check() {
 
 }
+
+
+
+//when hitting the last row or successfully get the color code, pop up result message!
+
+
+
+
+
+
 
 
 /*----- view functions -----*/
