@@ -30,14 +30,14 @@ h1 {
     height: 60%vh;
 }
 
-#playBoard {
+#board {
     display: grid;
     grid-template-rows: repeat(12, 5vmin);
     grid-template-columns: repeat(4, 5vmin);
 
 }
 
-#playBoard>div {
+#board>div {
     margin: 1vmin;
     border: 0.2vmin solid black;
     border-radius: 50%;
@@ -78,7 +78,7 @@ h1 {
     /* border: 0.2vmin solid lightgray; */
 }
 
-.colours>div {
+.colours> .circle {
     margin: 1vmin;
     border: 0.2vmin solid black;
     border-radius: 50%;
@@ -115,10 +115,55 @@ h1 {
     column-gap: 2vmin;
 }
 
-.button>button {
+button:active {
+    background-color: #b6d7a8;
+}
+
+.square {
     margin-top: 2vmin;
     padding: 0.5vmin;
     background-color: grey;
     color: white;
     font-size: 2vmin;
 }
+
+/* popup window for instructions */
+.form-popup {
+    display: none;
+    position: absolute;
+    margin: 10vmin;
+    border: 0.2vmin solid gray;
+}
+
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(255,255,255,0.95);
+    margin-right: 0.5em;
+    justify-content: center;
+    align-items: center;
+
+}
+.form-container > p {
+    margin: 0;
+    font-weight: bold;
+}
+
+.btn-close {
+    margin-top: 0.5em;
+    align-self: end;
+}
+
+
+/* give this close button different click effect */
+.btn-close:active {
+    background-color: grey;
+    color: white;
+}
+
+#attention {
+    color: orange;
+}
+/* Add some clicked effects to buttons */
+

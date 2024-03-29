@@ -1,33 +1,28 @@
 /*----- constants -----*/
 
 const allColors = ['red', 'orange', 'yellow', 'green', 'blue', 'purple']
+
+
 /*----- state variables -----*/
 let computerChoice;
 // let playerChoice = [];
 
+
 /*----- cached elements  -----*/
 
-//get each of div (circle)
+
 const boardEl = document.querySelectorAll('.playBoard');
-
-
-
 const hintsEl = document.getElementById('hints')
-// const red = document.getElementById('red');
-// const orange = document.getElementById('orange');
-// const yellow = document.getElementById('yellow');
-// const green = document.getElementById('green');
-// const blue = document.getElementById('blue');
-// const purple = document.getElementById('purple');
 const colorEl = document.querySelector('.colours');
 const buttonEl = document.querySelector('.button')
+const instructionEL = document.getElementById('instructionPopup')
 
 
 
 /*----- event listeners -----*/
 buttonEl.addEventListener('click', buttonElClickHandler);
 colorEl.addEventListener('click', colorElClickHandler);
-// boardEl.addEventListener('click', boardElClickHandler);
+
 
 
 
@@ -72,28 +67,34 @@ function colorElClickHandler(event) {
 //when clicking buttons
 
 function buttonElClickHandler(event) {
-    event.preventDefault();
+    if (event.target.className !== "square") {
+        return;
+    }
+    
     const target = event.target.getAttribute('name');
     if (target === 'instructions') {
-        instructionWindow()
+        openInstructionForm();
     } else if (target === 'restart') {
-        restart()
+        restart();
     } else if (target === 'backspace') {
-        backspace()
+        backspace();
     } else {
-        check()
+        check();
     }
 }
 
 
 
-
 //pop up windows
-function instructionWindow() {
-    window.alert('instructions blah blah')
+//for instructions
+function openInstructionForm() {
+    instructionEL.style.display = "block";
+    
 }
 
-
+function closeInsturctionForm() {
+    instructionEL.style.display = "none";
+}
 
 
 
@@ -103,6 +104,11 @@ function restart() {
     for (i = 0; i < 48; i++) {
         boardEl[i].style.backgroundColor = 'white'; 
     }
+
+
+
+
+
 
     //regenerate computer choice
     computerChoice = setComputerChoice();
