@@ -3,12 +3,13 @@
 const redColor = 'rgb(234, 153, 153)';
 const orangeColor = 'rgb(249, 203, 156)'
 const yellowColor = 'rgb(255, 229, 153)';
-const greenColor = 'rgb(​182, 15, 168)';
+const greenColor = 'rgb(182, 215, 168)';
 const blueColor = 'rgb(159, 197, 232)';
 const purpleColor = 'rgb(180, 167, 214)';
 
 const allColors = [redColor, orangeColor, yellowColor, greenColor, blueColor, purpleColor]
 
+const correctHints = "black,black,black,black";
 // const allColors = ['red', 'orange', 'yellow', 'green', 'blue', 'puprle']
 
 
@@ -133,6 +134,8 @@ function restart() {
     computerChoice = setComputerChoice();
     hints = [];
 
+    closeInsturctionForm();
+
 
 }
 
@@ -176,10 +179,6 @@ function check() {
             i = i - 4;
         } else {
             //calculate hints based on players choice and computer choice
-            console.log(i)
-            console.log(playerChoice[i]);
-            console.log(playerChoice)
-            console.log(computerChoice[i])
             if (playerChoice[i] === computerChoice[i]) {
                 hints.unshift('black')
             } else if (computerChoice.includes(playerChoice[i])) {
@@ -191,8 +190,11 @@ function check() {
             console.log(hints)
         }
     }    
-    
+    console.log(hints)
     updateHintSection(hints);
+    checkHintSection(hints);
+    console.log(hints.slice(-4).toString());
+    console.log(correctHints)
 }
 
 //update hint section color based on hints array
@@ -203,11 +205,18 @@ function updateHintSection(hints) {
             hintsEl[i].style.backgroundColor = 'white'
         }
     }
-    //when have 4 black hints on a row, send win message
-    if (hints.forEach((el)=> {
-        el === 'black'
-    })) {
-        openWinMessgae()
+    
+}  
+
+
+//when have 4 black hints on a row (the last 4 in the array are black), send win message
+function checkHintSection(hints) {
+    //convert array to string to compare
+    if (hints.slice(-4).toString() === correctHints) {
+        openWinMessgae();
+        //when run out of 12 turns, still doesnt get the correct code, send loose message
+    } else if (hints.length >= 47) {
+        openLooseMessage();
     }
 }
 
@@ -223,25 +232,23 @@ function openInstructionForm() {
 
 }
 
+//when hitting the last row and havent get correct secrete code, sending loose messgae
+function openLooseMessage() {
+    looseEl.style.display = "block";
+}
+
+//successfully get the color code, pop up win message
+function openWinMessgae() {
+    winEl.style.display = "block";
+}
+
+
 //for all popup windows
 function closeInsturctionForm() {
     instructionEL.style.display = "none";
     winEl.style.display = "none";
     looseEl.style.display = "none";
 }
-
-
-//when hitting the last row and havent get correct secrete code, sending loose messgae
-function openLooseMessgae() {
-    looseEl.style.display = "display";
-}
-
-//successfully get the color code, pop up win message
-function openWinMessgae() {
-    winEl.style.display = "display";
-}
-
-
 
 
 
