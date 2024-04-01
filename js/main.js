@@ -10,7 +10,6 @@ const purpleColor = 'rgb(180, 167, 214)';
 const allColors = [redColor, orangeColor, yellowColor, greenColor, blueColor, purpleColor]
 
 const correctHints = "black,black,black,black";
-// const allColors = ['red', 'orange', 'yellow', 'green', 'blue', 'puprle']
 
 
 
@@ -26,13 +25,14 @@ let hints;
 
 const boardEl = document.querySelectorAll('.playBoard');
 const hintsEl = document.querySelectorAll('.feedback');
-const colorEl = document.querySelector('.colours');
+const colorEl = document.querySelectorAll('.circle');
+
 const buttonEl = document.querySelector('.button');
 const instructionEL = document.getElementById('instructionPopup');
 const winEl = document.getElementById('winMessage');
 const looseEl = document.getElementById('looseMessage');
 
-const playAgain = document.querySelector('btn-restart');
+// const playAgain = document.querySelector('btn-restart');
 
 const red = document.getElementById('red');
 const orange = document.getElementById('orange');
@@ -46,7 +46,10 @@ const purple = document.getElementById('purple');
 
 /*----- event listeners -----*/
 buttonEl.addEventListener('click', buttonElClickHandler);
-colorEl.addEventListener('click', colorElClickHandler);
+// colorEl.addEventListener('click', colorElClickHandler);
+colorEl.forEach(button => {
+    button.addEventListener('click', colorElClickHandler);
+});
 
 
 /*----- functions -----*/
@@ -74,7 +77,7 @@ function setComputerChoice() {
 }
 
 let computerChoice = setComputerChoice();
-console.log(computerChoice)
+// console.log(computerChoice)
 
 
 
@@ -85,11 +88,13 @@ console.log(computerChoice)
 //when clicking colors to choose color - set players choice
 
 function colorElClickHandler(event) {
+    
     if (event.target.className !== "circle") {
         return;
     }
     //check the hole color, if it is white then the chosen color can be assigned to it, otherwise need to assign the next one
     const targetColor = getComputedStyle(event.target).backgroundColor;
+    console.log(targetColor)
 
 
     for (i = 0; i < boardEl.length; i++) {
@@ -131,11 +136,9 @@ function restart() {
         hintsEl[i].style.backgroundColor = 'white';
     }
     //regenerate computer choice
-    computerChoice = setComputerChoice();
-    hints = [];
-
+    setComputerChoice();
     closeInsturctionForm();
-
+    
 
 }
 
@@ -153,7 +156,7 @@ function backspace() {
 //compare players choice with computer choice for hint section
 function getPlayerChoice() {
     let playerChoice = [];
-    
+
     for (let i = boardEl.length - 1; i >= 0;) {
         if (getComputedStyle(boardEl[i]).backgroundColor === 'rgb(255, 255, 255)') {
             i = i - 4; //move back by 4 positions if the hole is empty, which means players hasnt choose color for the hole
@@ -163,7 +166,7 @@ function getPlayerChoice() {
 
             i--; //move back by 1 position
         }
-        
+
     }
     return playerChoice;
 
@@ -187,14 +190,12 @@ function check() {
                 hints.unshift('none')
             }
             i--;
-            console.log(hints)
+
         }
-    }    
+    }
     console.log(hints)
     updateHintSection(hints);
     checkHintSection(hints);
-    console.log(hints.slice(-4).toString());
-    console.log(correctHints)
 }
 
 //update hint section color based on hints array
@@ -205,8 +206,8 @@ function updateHintSection(hints) {
             hintsEl[i].style.backgroundColor = 'white'
         }
     }
-    
-}  
+
+}
 
 
 //when have 4 black hints on a row (the last 4 in the array are black), send win message
@@ -221,25 +222,38 @@ function checkHintSection(hints) {
 }
 
 
+//disable function - cant choose any colors when checking and popup windows show up
 
+function disable() {
+    colorEl.forEach(button => {
+        button.disabled = true;
+    });
+}
 
-
+//back to norm
+function enable() {
+    colorEl.forEach(button => {
+        button.disabled = false;
+    });
+}
 
 //pop up windows
 //for instructions only
 function openInstructionForm() {
     instructionEL.style.display = "block";
-
+    disable()
 }
 
 //when hitting the last row and havent get correct secrete code, sending loose messgae
 function openLooseMessage() {
     looseEl.style.display = "block";
+    disable()
 }
 
 //successfully get the color code, pop up win message
 function openWinMessgae() {
     winEl.style.display = "block";
+    disable()
 }
 
 
@@ -248,6 +262,7 @@ function closeInsturctionForm() {
     instructionEL.style.display = "none";
     winEl.style.display = "none";
     looseEl.style.display = "none";
+    enable();
 }
 
 
