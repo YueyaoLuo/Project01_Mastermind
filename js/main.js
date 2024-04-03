@@ -14,9 +14,9 @@ const correctHints = "black,black,black,black";
 
 
 /*----- state variables -----*/
+let computerChoice;
 let playerChoice;
 let hints;
-let computerChoice;
 
 
 /*----- cached elements  -----*/
@@ -44,8 +44,8 @@ const purple = document.getElementById('purple');
 // console.log(getComputedStyle(boardEl[1]).backgroundColor)
 
 /*----- event listeners -----*/
+
 buttonEl.addEventListener('click', buttonElClickHandler);
-// colorEl.addEventListener('click', colorElClickHandler);
 colorEl.forEach(button => {
     button.addEventListener('click', colorElClickHandler);
 });
@@ -75,8 +75,10 @@ function setComputerChoice() {
 
 }
 
+
 computerChoice = setComputerChoice();
 console.log(computerChoice);//intended to log this out to check if the game works properly 
+
 
 
 
@@ -87,18 +89,15 @@ console.log(computerChoice);//intended to log this out to check if the game work
 //when clicking colors to choose color - set players choice
 
 function colorElClickHandler(event) {
-    
+
     if (event.target.className !== "circle") {
         return;
     }
     //check the hole color, if it is white then the chosen color can be assigned to it, otherwise need to assign the next one
     const targetColor = getComputedStyle(event.target).backgroundColor;
-
-
-
     for (i = 0; i < boardEl.length; i++) {
         if (getComputedStyle(boardEl[i]).backgroundColor === 'rgb(255, 255, 255)') {
-            boardEl[i].style.backgroundColor = targetColor;
+            assignColor(boardEl[i], targetColor)
             break;
         };
     }
@@ -114,7 +113,6 @@ function buttonElClickHandler(event) {
     if (event.target.className !== "square") {
         return;
     }
-
     const target = event.target.getAttribute('name');
     if (target === 'instructions') {
         openInstructionForm();
@@ -129,15 +127,12 @@ function buttonElClickHandler(event) {
 
 //for restart button and also the play/try again button inside of win or loose message
 function restart() {
-    //playboard and hint section back to white
-    for (i = 0; i < boardEl.length; i++) {
-        boardEl[i].style.backgroundColor = 'white';
-        hintsEl[i].style.backgroundColor = 'white';
-    }
+    // reset board and hint section colors to default white
+    colorBacktoWhite()
     //regenerate computer choice
     setComputerChoice();
     closeInsturctionForm();
-    
+
 
 }
 
@@ -192,21 +187,11 @@ function check() {
 
         }
     }
-    console.log(hints)
     updateHintSection(hints);
     checkHintSection(hints);
 }
 
-//update hint section color based on hints array
-function updateHintSection(hints) {
-    for (i = 0; i < 48; i++) {
-        hintsEl[i].style.backgroundColor = hints[i]
-        if (hints[i] === 'none') {
-            hintsEl[i].style.backgroundColor = 'white'
-        }
-    }
 
-}
 
 
 //when have 4 black hints on a row (the last 4 in the array are black), send win message
@@ -232,7 +217,7 @@ function disable() {
     });
 }
 
-//back to norm
+//back to norm after disabled
 function enable() {
     colorEl.forEach(button => {
         button.disabled = false;
@@ -245,28 +230,28 @@ function enable() {
 //pop up windows
 //for instructions only
 function openInstructionForm() {
-    instructionEL.style.display = "block";
+    displayPopupWindows(instructionEL);
     disable()
 }
 
 //when hitting the last row and havent get correct secrete code, sending loose messgae
 function openLooseMessage() {
-    looseEl.style.display = "block";
-    disable()
+    displayPopupWindows(looseEl);
+    disable();
 }
 
 //successfully get the color code, pop up win message
 function openWinMessgae() {
-    winEl.style.display = "block";
+    displayPopupWindows(winEl);
     disable()
 }
 
 
 //for all popup windows
 function closeInsturctionForm() {
-    instructionEL.style.display = "none";
-    winEl.style.display = "none";
-    looseEl.style.display = "none";
+    closePopupWindows(instructionEL);
+    closePopupWindows(winEl);
+    closePopupWindows(looseEl);
     enable();
 }
 
@@ -275,5 +260,45 @@ function closeInsturctionForm() {
 
 
 
+
+
+
+
 /*----- view functions -----*/
-//to render players choices and hint colour codes
+
+// assign target colors to element
+function assignColor(El, targetColor) {
+    El.style.backgroundColor = targetColor;
+}
+
+
+//update hint section color based on hints array
+function updateHintSection(hints) {
+    for (i = 0; i < 48; i++) {
+        hintsEl[i].style.backgroundColor = hints[i]
+        if (hints[i] === 'none') {
+            hintsEl[i].style.backgroundColor = 'white'
+        }
+    }
+
+}
+
+
+//playboard and hint section back to white - for restart btn
+function colorBacktoWhite() {
+    for (i = 0; i < boardEl.length; i++) {
+        boardEl[i].style.backgroundColor = 'white';
+        hintsEl[i].style.backgroundColor = 'white';
+    }
+}
+
+
+//to display pop-up windows
+function displayPopupWindows(El) {
+    El.style.display = 'block'
+}
+
+//to close pop up windows
+function closePopupWindows(El) {
+    El.style.display = 'none'
+}
