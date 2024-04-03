@@ -4,13 +4,8 @@ MASTERMIND
 
 
 # Screenshots
-![initial screen](/wireframes/initial%20screen.png)
-[instruction screen](/wireframes/instruction%20screen.png)
-![playing screen](/wireframes/playing%20screen1.png)
-![checking screen](/wireframes/playing%20screen2.png)
-![restart screen](/wireframes/restart%20screen.png)
-![won screen](/wireframes/win%20screen.png)
-![lost screen](/wireframes/lose%20screen.png)
+![wireframes](/wireframes/Screenshot%202024-03-23%20160756.png)
+
 
 
 # Description: 
@@ -43,7 +38,7 @@ MASTERMIND
 
 
 # Getting Started:
-LINK TO BE ADDED
+[Mastermind Game](/index.html)
 
 
 # Next Steps:
@@ -57,7 +52,11 @@ LINK TO BE ADDED
 - [X] create playing board
 - [x] create bottons
 - [x] set computer randomly generated secrete color code
-- [ ] pop-up windows to send message
 - [x] user click to choose colours
-- [ ] Hint section to provide feedback based on rules and player's choices
+- [x] Button for instructions
+- [x] Button for restart the game
+- [x] Button for backspace, allowing player to change mind
+- [x] Button for checking players choice
+- [x] Hint section to provide feedback based on rules and player's choices
+- [x] pop-up windows to send result message
 - [ ] Refine UI

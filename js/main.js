@@ -14,10 +14,9 @@ const correctHints = "black,black,black,black";
 
 
 /*----- state variables -----*/
-// let computerChoice;
 let playerChoice;
 let hints;
-
+let computerChoice;
 
 
 /*----- cached elements  -----*/
@@ -26,7 +25,7 @@ let hints;
 const boardEl = document.querySelectorAll('.playBoard');
 const hintsEl = document.querySelectorAll('.feedback');
 const colorEl = document.querySelectorAll('.circle');
-
+const squareEl = document.querySelectorAll('.square');
 const buttonEl = document.querySelector('.button');
 const instructionEL = document.getElementById('instructionPopup');
 const winEl = document.getElementById('winMessage');
@@ -76,8 +75,8 @@ function setComputerChoice() {
 
 }
 
-let computerChoice = setComputerChoice();
-// console.log(computerChoice)
+computerChoice = setComputerChoice();
+console.log(computerChoice);//intended to log this out to check if the game works properly 
 
 
 
@@ -94,7 +93,7 @@ function colorElClickHandler(event) {
     }
     //check the hole color, if it is white then the chosen color can be assigned to it, otherwise need to assign the next one
     const targetColor = getComputedStyle(event.target).backgroundColor;
-    console.log(targetColor)
+
 
 
     for (i = 0; i < boardEl.length; i++) {
@@ -228,11 +227,17 @@ function disable() {
     colorEl.forEach(button => {
         button.disabled = true;
     });
+    squareEl.forEach(button => {
+        button.disabled = true;
+    });
 }
 
 //back to norm
 function enable() {
     colorEl.forEach(button => {
+        button.disabled = false;
+    });
+    squareEl.forEach(button => {
         button.disabled = false;
     });
 }
