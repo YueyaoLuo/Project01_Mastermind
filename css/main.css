@@ -1,24 +1,26 @@
 * {
     font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
     box-sizing: border-box;
 }
 
 body {
 
-    height: 100vh;
+    height: 100%;
     margin: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
+/* Game's name */
 h1 {
     text-align: center;
     font-size: 5vmin;
 }
 
 
-
+/* Play board + hint section + pop-up forms are under #section */
 #section {
     display: grid;
     grid-template-columns: 4fr 4fr;
@@ -27,6 +29,7 @@ h1 {
     position: relative;
 }
 
+/* play board */
 #board {
     display: grid;
     grid-template-rows: repeat(12, 5vmin);
@@ -48,14 +51,13 @@ h1 {
 
 }
 
+/* hints section */
 #hints {
     display: grid;
     grid-template-rows: repeat(12, 5vmin);
     grid-template-columns: repeat(4, 5vmin);
 
 }
-
-
 
 #hints>div {
     margin: 1.8vmin;
@@ -67,6 +69,7 @@ h1 {
     align-items: center;
 }
 
+/* color selections */
 .colours {
     display: grid;
     grid-template-rows: repeat(1, 5vmin);
@@ -109,7 +112,7 @@ h1 {
     background-color: #b4a7d6
 }
 
-
+/* all buttons */
 .button {
     display: flex;
     column-gap: 2vmin;
@@ -128,39 +131,54 @@ h1 {
     font-size: 2vmin;
 }
 
+
 /* popup windows */
 .form-popup {
-    /* display: block; */
+    display: block;
     position: absolute;
     border: 0.2vmin solid gray;
     width: 100%;
-    background-color: burlywood;
     align-self: center;
+    font-size: 10px
 }
 
-.form-popup.instruction{
-    width: 120%;
-    background-color: red;
+.form-popup.instruction {
+    width: 180%;
+    left: -40%;
+    display: none;
 }
-
-
 
 .form-container {
     display: flex;
     flex-direction: column;
     background-color: rgb(255, 255, 255, 0.95);
-    justify-content: center;
     align-items: center;
-    padding: 1rem;
 }
 
 .form-container>p {
-    margin: 0;
     font-weight: bold;
+    font-size: 14px;
+    margin: 0;
 }
 
-.form-container>ul {
-    margin-right: 1rem;
+ul {
+    margin-right: 12px;
+    margin-left: 12px;
+    padding-inline-start: 12px;
+}
+
+.btn-close {
+    margin: 5px;
+    font-size: 12px;
+}
+
+h3 {
+    font-size: 15px;
+    margin: 0.5rem;
+}
+
+.btn-restart {
+    margin: 1rem;
 }
 
 .btn-close {
@@ -179,25 +197,203 @@ h1 {
 }
 
 /* change win and loose window color */
-#winMessage>.form-container {
-
-    background-color: #ffe599;
-}
-
+#winMessage>.form-container,
 #looseMessage>.form-container {
     background-color: #ffe599;
 }
 
-h3 {
-    margin: 0.5em;
-}
-
-/* change the effect and layout for restart button */
+/* change the effect and layout for play again button */
 .btn-restart:hover {
     background-color: #b6d7a8;
 }
 
 .btn-restart {
     align-self: center;
-    margin-top: 1rem;
+
+}
+
+
+/* media queries */
+/* X-Small devices (portrait phones, less than 576px)*/
+@media only screen and (max-width: 575px) {
+    ul {
+        margin-right: 12px;
+        margin-left: 12px;
+        padding-inline-start: 12px;
+    }
+
+    .btn-close {
+        margin: 5px;
+        font-size: 12px;
+    }
+
+    .form-popup {
+        font-size: 10px;
+    }
+
+    h3 {
+        font-size: 15px;
+        margin: 0.5rem;
+    }
+
+    .btn-restart {
+        margin: 1rem;
+    }
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media only screen and (min-width: 576px) {
+    p {
+        font-size: 16px;
+    }
+
+    ul {
+        margin-right: 28px;
+        margin-left: 28px;
+        padding-inline-start: 28px;
+        
+    }
+    li{
+        font-size: 14px;
+    }
+
+    .btn-close {
+        margin: 6px;
+        font-size: 16px;
+    }
+
+    h3 {
+        font-size: 22px;
+    }
+
+    .btn-restart {
+        font-size: 18px;
+        margin: 1rem;
+    }
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+    p {
+        margin: 0;
+        font-size: 18px;
+    }
+
+    ul {
+        margin-right: 30px;
+        margin-left: 30px;
+        padding-inline-start: 30px;
+        
+    }
+    li{
+        font-size: 16px;
+    }
+
+    .btn-close {
+        margin: 8px;
+        font-size: 18px;
+    }
+
+    h3 {
+        font-size: 26px;
+    }
+
+    .btn-restart {
+        font-size: 22px;
+        margin: 2rem;
+    }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+    p {
+        font-size: 20px;
+    }
+
+    ul {
+        margin-right: 32px;
+        margin-left: 32px;
+        margin-bottom: 22px;
+        padding-inline-start: 32px;
+        
+    }
+    li{
+        font-size: 18px;
+    }
+
+    .btn-close {
+        margin: 10px;
+        font-size: 24px;
+    }
+
+    h3 {
+        font-size: 32px;
+    }
+
+    .btn-restart {
+        font-size: 28px;
+
+    }
+}
+
+/* X-Large devices (large desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+    p {
+        font-size:22px;
+    }
+
+    ul {
+        margin-right: 34px;
+        margin-left: 34px;
+        padding-inline-start: 34px;
+        
+    }
+    li{
+        font-size: 20px;
+    }
+
+    .btn-close {
+        margin: 12px;
+        font-size: 28px;
+    }
+
+    h3 {
+        font-size: 34px;
+    }
+
+    .btn-restart {
+        font-size: 30px;
+
+    }
+}
+
+/* XX-Large devices (larger desktops, 1400px and up) */
+@media only screen and (min-width: 1400px) {
+    p {
+        font-size:24px;
+    }
+
+    ul {
+        margin-right: 36px;
+        margin-left: 36px;
+        padding-inline-start: 36px;
+        
+    }
+    li{
+        font-size: 22px;
+    }
+
+    .btn-close {
+        margin: 14px;
+        font-size: 32px;
+    }
+
+    h3 {
+        font-size: 36px;
+    }
+
+    .btn-restart {
+        font-size: 32px;
+
+    }
 }
