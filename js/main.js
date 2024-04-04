@@ -1,12 +1,10 @@
 /*----- constants -----*/
-
 const redColor = 'rgb(234, 153, 153)';
 const orangeColor = 'rgb(249, 203, 156)'
 const yellowColor = 'rgb(255, 229, 153)';
 const greenColor = 'rgb(182, 215, 168)';
 const blueColor = 'rgb(159, 197, 232)';
 const purpleColor = 'rgb(180, 167, 214)';
-
 const allColors = [redColor, orangeColor, yellowColor, greenColor, blueColor, purpleColor]
 
 const correctHints = "black,black,black,black";
@@ -20,8 +18,6 @@ let hints;
 
 
 /*----- cached elements  -----*/
-
-
 const boardEl = document.querySelectorAll('.playBoard');
 const hintsEl = document.querySelectorAll('.feedback');
 const colorEl = document.querySelectorAll('.circle');
@@ -31,8 +27,7 @@ const instructionEL = document.getElementById('instructionPopup');
 const winEl = document.getElementById('winMessage');
 const looseEl = document.getElementById('looseMessage');
 
-// const playAgain = document.querySelector('btn-restart');
-
+// all color elements
 const red = document.getElementById('red');
 const orange = document.getElementById('orange');
 const yellow = document.getElementById('yellow');
@@ -41,7 +36,6 @@ const blue = document.getElementById('blue');
 const purple = document.getElementById('purple');
 
 
-// console.log(getComputedStyle(boardEl[1]).backgroundColor)
 
 /*----- event listeners -----*/
 
@@ -75,13 +69,8 @@ function setComputerChoice() {
 
 }
 
-
 computerChoice = setComputerChoice();
 console.log(computerChoice);//intended to log this out to check if the game works properly 
-
-
-
-
 
 
 
@@ -103,12 +92,7 @@ function colorElClickHandler(event) {
     }
 }
 
-
-
-
-
 //when clicking buttons
-
 function buttonElClickHandler(event) {
     if (event.target.className !== "square") {
         return;
@@ -128,7 +112,11 @@ function buttonElClickHandler(event) {
 //for restart button and also the play/try again button inside of win or loose message
 function restart() {
     // reset board and hint section colors to default white
-    colorBacktoWhite()
+    for (i = 0; i < boardEl.length; i++) {
+        colorBacktoWhite(boardEl[i]);
+        colorBacktoWhite(hintsEl[i]);
+    }
+
     //regenerate computer choice
     setComputerChoice();
     closeInsturctionForm();
@@ -144,8 +132,6 @@ function backspace() {
         }
     }
 }
-
-
 
 //compare players choice with computer choice for hint section
 function getPlayerChoice() {
@@ -191,9 +177,6 @@ function check() {
     checkHintSection(hints);
 }
 
-
-
-
 //when have 4 black hints on a row (the last 4 in the array are black), send win message
 function checkHintSection(hints) {
     //convert array to string to compare
@@ -205,6 +188,15 @@ function checkHintSection(hints) {
     }
 }
 
+//update hint section color based on hints array
+function updateHintSection(hints) {
+    for (i = 0; i < 48; i++) {
+        hintsEl[i].style.backgroundColor = hints[i]
+        if (hints[i] === 'none') {
+            colorBacktoWhite(hintsEl[i]);
+        }
+    }
+}
 
 //disable function - cant choose any colors when checking and popup windows show up
 
@@ -256,14 +248,6 @@ function closeInsturctionForm() {
 }
 
 
-
-
-
-
-
-
-
-
 /*----- view functions -----*/
 
 // assign target colors to element
@@ -271,25 +255,9 @@ function assignColor(El, targetColor) {
     El.style.backgroundColor = targetColor;
 }
 
-
-//update hint section color based on hints array
-function updateHintSection(hints) {
-    for (i = 0; i < 48; i++) {
-        hintsEl[i].style.backgroundColor = hints[i]
-        if (hints[i] === 'none') {
-            hintsEl[i].style.backgroundColor = 'white'
-        }
-    }
-
-}
-
-
 //playboard and hint section back to white - for restart btn
-function colorBacktoWhite() {
-    for (i = 0; i < boardEl.length; i++) {
-        boardEl[i].style.backgroundColor = 'white';
-        hintsEl[i].style.backgroundColor = 'white';
-    }
+function colorBacktoWhite(El) {
+    El.style.backgroundColor = 'white'
 }
 
 
