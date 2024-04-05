@@ -38,7 +38,7 @@ MASTERMIND
 
 
 # Getting Started:
-[Mastermind Game](/index.html)
+[Mastermind Game](https://yueyaoluo.github.io/Project01_Mastermind/)
 
 
 # Next Steps:
@@ -59,4 +59,4 @@ MASTERMIND
 - [x] Button for checking players choice
 - [x] Hint section to provide feedback based on rules and player's choices
 - [x] pop-up windows to send result message
-- [ ] Refine UI
+- [x] Refine UI
