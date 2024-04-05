@@ -34,8 +34,6 @@ h1 {
     display: grid;
     grid-template-rows: repeat(12, 5vmin);
     grid-template-columns: repeat(4, 5vmin);
-
-
 }
 
 #board>.playBoard {
@@ -47,8 +45,6 @@ h1 {
     display: flex;
     justify-content: center;
     align-items: center;
-
-
 }
 
 /* hints section */
@@ -56,7 +52,6 @@ h1 {
     display: grid;
     grid-template-rows: repeat(12, 5vmin);
     grid-template-columns: repeat(4, 5vmin);
-
 }
 
 #hints>div {
@@ -134,7 +129,7 @@ h1 {
 
 /* popup windows */
 .form-popup {
-    display: block;
+    display: none;
     position: absolute;
     border: 0.2vmin solid gray;
     width: 100%;
@@ -143,9 +138,9 @@ h1 {
 }
 
 .form-popup.instruction {
+    display: none;
     width: 180%;
     left: -40%;
-    display: none;
 }
 
 .form-container {
