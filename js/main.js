@@ -49,6 +49,12 @@ colorEl.forEach(button => {
 /*----- model functions -----*/
 
 //when initilizing the game, computer generated random secrete color code (including duplicated color)
+init()
+
+function init() {
+    document.addEventListener('DOMContentLoaded', computerChoice)
+    computerChoice = setComputerChoice();
+}
 
 function setComputerChoice() {
 
@@ -69,7 +75,6 @@ function setComputerChoice() {
 
 }
 
-computerChoice = setComputerChoice();
 console.log(computerChoice);//intended to log this out to check if the game works properly 
 
 
